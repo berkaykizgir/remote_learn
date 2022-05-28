@@ -109,8 +109,53 @@ class _ScreenQuizState extends State<ScreenQuiz> {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          elevation: 1,
-          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.report))],
+          elevation: 0,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text("Is there any problem with question ?"),
+                      content: const Text("Do you want to report this question?"),
+                      actions: <Widget>[
+                        const TextField(
+                          decoration: InputDecoration(
+                            hintText: "can you explain the problem",
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: const Text(
+                                    "Report question",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: const Text(
+                                    "Cancel",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.report))
+          ],
         ),
         body: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return Container(
