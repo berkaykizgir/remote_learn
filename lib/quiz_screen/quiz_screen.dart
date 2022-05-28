@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:remote_learn/preferences.dart';
 import 'package:remote_learn/quiz_screen/quiz_contents.dart';
-import 'package:remote_learn/widgets/display.dart';
 
 class ScreenQuiz extends StatefulWidget {
   const ScreenQuiz({Key? key}) : super(key: key);
@@ -39,7 +38,6 @@ class _ScreenQuizState extends State<ScreenQuiz> {
       }
       qNumber = newNumber;
       String correct = question[qNumber]['answer'][question[qNumber]['correct']];
-
       List answer = question[qNumber]['answer'];
       answer.shuffle();
       question[qNumber]['answer'] = answer;
@@ -80,11 +78,20 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Text(
-                          question[qNumber]['question'].toString(),
-                          style: const TextStyle(
-                            fontSize: 40,
-                            color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Text(
+                            question[qNumber]['question'].toString(),
+                            style: const TextStyle(
+                              fontSize: 26,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 16.0),
+                          child: Divider(
+                            thickness: 5,
                           ),
                         ),
                         Row(
@@ -114,16 +121,13 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                               flex: 9,
                               child: Padding(
                                 padding: const EdgeInsets.all(18.0),
-                                child: DropCapText((question[qNumber]['answer'] as List)[0].toString(),
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                    dropCap: DropCap(
-                                      height: 0,
-                                      width: 0,
-                                      child: Container(),
-                                    )),
+                                child: Text(
+                                  (question[qNumber]['answer'] as List)[0].toString(),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -154,16 +158,13 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                               flex: 9,
                               child: Padding(
                                 padding: const EdgeInsets.all(18.0),
-                                child: DropCapText((question[qNumber]['answer'] as List)[1].toString(),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                    dropCap: DropCap(
-                                      height: 0,
-                                      width: 0,
-                                      child: Container(),
-                                    )),
+                                child: Text(
+                                  (question[qNumber]['answer'] as List)[1].toString(),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -194,13 +195,10 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                               flex: 9,
                               child: Padding(
                                 padding: const EdgeInsets.all(18.0),
-                                child: DropCapText((question[qNumber]['answer'] as List)[2].toString(),
-                                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                                    dropCap: DropCap(
-                                      height: 0,
-                                      width: 0,
-                                      child: Container(),
-                                    )),
+                                child: Text(
+                                  (question[qNumber]['answer'] as List)[2].toString(),
+                                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                                ),
                               ),
                             ),
                           ],
@@ -231,13 +229,10 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                               flex: 9,
                               child: Padding(
                                 padding: const EdgeInsets.all(18.0),
-                                child: DropCapText((question[qNumber]['answer'] as List)[3].toString(),
-                                    style: const TextStyle(fontSize: 20, color: Colors.white),
-                                    dropCap: DropCap(
-                                      height: 0,
-                                      width: 0,
-                                      child: Container(),
-                                    )),
+                                child: Text(
+                                  (question[qNumber]['answer'] as List)[3].toString(),
+                                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                                ),
                               ),
                             ),
                           ],
