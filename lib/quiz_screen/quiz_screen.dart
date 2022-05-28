@@ -106,7 +106,12 @@ class _ScreenQuizState extends State<ScreenQuiz> {
     }
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 1,
+          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.report))],
+        ),
         body: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return Container(
             decoration: Preferences().getMorning
