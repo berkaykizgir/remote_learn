@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	], 
+	"settings": {
+		"dart.lineLength": 160,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": true
+		}
+	}
+}
