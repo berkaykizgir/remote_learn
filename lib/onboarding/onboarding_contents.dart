@@ -14,7 +14,7 @@ List<OnboardingContents> contents = [
         "remoteLearn() fonksiyonunu çağırarak yepyeni bir çalışma deneyimine hazır mısın ? Dijitalleştirilmiş ve oyunlaştırılmış yeni öğrenim methodlarıyla remoteLearn() her zaman yanında ! Bu arada, eğer gündüz çalışmayı sevmiyorsan, yukarıda bulunan arkadaşımıza dokunarak zamanı ileri sarmasını isteyebilirsin.",
   ),
   OnboardingContents(
-    title: "İlerlemeni her zaman takip edebilirsin",
+    title: "İlerlemeni her zaman takip edebilirsin ",
     image: "assets/images/track.png",
     desc:
         "Gözlemlediğin kurslar ve içeriklerin yüzde kaçını tamamladığını gözlemyebilir ve kaldığın yerden devam edebilirsin. Dökümantasyonda bulunan kod blokları ve sorular paylaşıma her zaman açık. Arkadaşlarınla bir araya gelip paylaşabilir ve bulduğun hatalarda bizlere bir geri dönüş mektubu yollayabilirsin. ",
