@@ -56,6 +56,7 @@ class _ScreenQuizState extends State<ScreenQuiz> {
         showingAnswer = true;
         if ((question[qNumber]['correct']).toString() == index) {
           answerCorrect = true;
+          Preferences().setBalance = 50;
         }
       });
     }).whenComplete(() {
@@ -111,6 +112,23 @@ class _ScreenQuizState extends State<ScreenQuiz> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
+            Image.asset(
+              "assets/images/coin.png",
+              width: 20,
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Center(
+                child: Text(
+                  Preferences().getBalance.toString(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
             IconButton(
                 onPressed: () {
                   showDialog(
@@ -277,9 +295,9 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                       right: 16,
                       child: AnimatedOpacity(
                         duration: const Duration(seconds: 1),
-                        opacity: showingAnswer ? 1 : 0,
+                        opacity: answerCorrect ? 1 : 0,
                         child: Image.asset(
-                          "assets/images/morning.png",
+                          "assets/images/correct.png",
                           height: 100,
                           width: 100,
                         ),

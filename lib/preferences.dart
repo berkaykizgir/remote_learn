@@ -7,6 +7,7 @@ class Preferences {
     'language': 'en_us',
     'route': '/onboarding',
     'isMorning': true,
+    'balance': 0,
   };
   factory Preferences() => _instance;
   Preferences._internal();
@@ -24,4 +25,6 @@ class Preferences {
   set setMorning(bool isMorning) => setBool('isMorning', isMorning);
   get getRoute => getString('route');
   set setRoute(String route) => setString('route', route);
+  get getBalance => getInt('balance');
+  set setBalance(int balance) => setInt('balance', Preferences().getBalance + balance);
 }
