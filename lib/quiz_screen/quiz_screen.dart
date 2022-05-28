@@ -29,6 +29,13 @@ class _ScreenQuizState extends State<ScreenQuiz> {
     return answerASelected || answerBSelected || answerCSelected || answerDSelected;
   }
 
+  bool containsCorrectAnswer(String index) {
+    if (showingAnswer) {
+      return (question[qNumber]['correct']).toString() == index;
+    }
+    return false;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -101,15 +108,17 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                         ),
                         Answer(
                           answerText: (question[qNumber]['answer'] as List)[0],
-                          answerColor: isAnyAnswerSelected()
-                              ? answerASelected
-                                  ? showingAnswer
-                                      ? answerCorrect
-                                          ? Colors.green
-                                          : Colors.red
-                                      : Colors.orange
-                                  : Colors.grey
-                              : Colors.transparent,
+                          answerColor: containsCorrectAnswer('0')
+                              ? Colors.green
+                              : isAnyAnswerSelected()
+                                  ? answerASelected
+                                      ? showingAnswer
+                                          ? answerCorrect
+                                              ? Colors.green
+                                              : Colors.red
+                                          : Colors.orange
+                                      : Colors.grey
+                                  : Colors.transparent,
                           answerTap: () {
                             setState(() {
                               answered = true;
@@ -138,15 +147,17 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                         ),
                         Answer(
                             answerText: (question[qNumber]['answer'] as List)[1],
-                            answerColor: isAnyAnswerSelected()
-                                ? answerBSelected
-                                    ? showingAnswer
-                                        ? answerCorrect
-                                            ? Colors.green
-                                            : Colors.red
-                                        : Colors.orange
-                                    : Colors.grey
-                                : Colors.transparent,
+                            answerColor: containsCorrectAnswer('1')
+                                ? Colors.green
+                                : isAnyAnswerSelected()
+                                    ? answerBSelected
+                                        ? showingAnswer
+                                            ? answerCorrect
+                                                ? Colors.green
+                                                : Colors.red
+                                            : Colors.orange
+                                        : Colors.grey
+                                    : Colors.transparent,
                             answerTap: () {
                               setState(() {
                                 answered = true;
@@ -174,15 +185,17 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                             }),
                         Answer(
                             answerText: (question[qNumber]['answer'] as List)[2],
-                            answerColor: isAnyAnswerSelected()
-                                ? answerCSelected
-                                    ? showingAnswer
-                                        ? answerCorrect
-                                            ? Colors.green
-                                            : Colors.red
-                                        : Colors.orange
-                                    : Colors.grey
-                                : Colors.transparent,
+                            answerColor: containsCorrectAnswer('2')
+                                ? Colors.green
+                                : isAnyAnswerSelected()
+                                    ? answerCSelected
+                                        ? showingAnswer
+                                            ? answerCorrect
+                                                ? Colors.green
+                                                : Colors.red
+                                            : Colors.orange
+                                        : Colors.grey
+                                    : Colors.transparent,
                             answerTap: () {
                               setState(() {
                                 answered = true;
@@ -210,15 +223,17 @@ class _ScreenQuizState extends State<ScreenQuiz> {
                             }),
                         Answer(
                             answerText: (question[qNumber]['answer'] as List)[3],
-                            answerColor: isAnyAnswerSelected()
-                                ? answerDSelected
-                                    ? showingAnswer
-                                        ? answerCorrect
-                                            ? Colors.green
-                                            : Colors.red
-                                        : Colors.orange
-                                    : Colors.grey
-                                : Colors.transparent,
+                            answerColor: containsCorrectAnswer('3')
+                                ? Colors.green
+                                : isAnyAnswerSelected()
+                                    ? answerDSelected
+                                        ? showingAnswer
+                                            ? answerCorrect
+                                                ? Colors.green
+                                                : Colors.red
+                                            : Colors.orange
+                                        : Colors.grey
+                                    : Colors.transparent,
                             answerTap: () {
                               setState(() {
                                 answered = true;
