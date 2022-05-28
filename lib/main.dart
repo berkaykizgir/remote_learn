@@ -8,15 +8,14 @@ import 'package:remote_learn/work_screens/work_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   await Preferences().init();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(const MeTest());
+  runApp(const RemoteLearn());
 }
 
-class MeTest extends StatelessWidget {
+class RemoteLearn extends StatelessWidget {
   static Map<String, Widget Function(BuildContext)> routes = {};
-  const MeTest({Key? key}) : super(key: key);
+  const RemoteLearn({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     routes = {
