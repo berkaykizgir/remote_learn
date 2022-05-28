@@ -19,7 +19,7 @@ class _ScreenWorkMainState extends State<ScreenWorkMain> {
               elevation: 0,
             ),
             body: Container(
-              decoration: Preferences().getMorning
+              decoration: Preferences().getTheme == 0
                   ? const BoxDecoration(
                       gradient: LinearGradient(
                           begin: Alignment.topRight,
@@ -50,7 +50,7 @@ class _ScreenWorkMainState extends State<ScreenWorkMain> {
                         child: Container(
                           width: 150,
                           height: 150,
-                          decoration: Preferences().getMorning
+                          decoration: Preferences().getTheme == 0
                               ? const BoxDecoration(
                                   gradient: LinearGradient(
                                       begin: Alignment.topRight,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:remote_learn/main_screen.dart';
+import 'package:remote_learn/student_main_screen.dart';
 import 'package:remote_learn/onboarding/onboarding_screen.dart';
 import 'package:remote_learn/preferences.dart';
 import 'package:remote_learn/quiz_screen/quiz_screen.dart';
+import 'package:remote_learn/teacher_main_screen.dart';
 import 'package:remote_learn/work_screens/work_main.dart';
 
 void main() async {
@@ -22,7 +23,8 @@ class RemoteLearn extends StatelessWidget {
       '/onboarding': (context) => const ScreenOnboarding(),
       '/screen-work-main': (context) => const ScreenWorkMain(),
       '/screen-quiz': (context) => const ScreenQuiz(),
-      '/screen-main': (context) => const MainScreen(),
+      '/student-main-screen': (context) => const StudentMainScreen(),
+      '/teacher-main-screen': (context) => const TeacherMainScreen(),
     };
     return MaterialApp(
       debugShowCheckedModeBanner: false,

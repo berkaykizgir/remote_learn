@@ -177,7 +177,7 @@ class _ScreenQuizState extends State<ScreenQuiz> {
         ),
         body: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return Container(
-            decoration: Preferences().getMorning
+            decoration: Preferences().getTheme == 0
                 ? const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topRight,

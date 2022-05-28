@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:remote_learn/preferences.dart';
 import 'package:remote_learn/quiz_screen/quiz_screen.dart';
+import 'package:remote_learn/teacher_flow/track_progress.dart';
 import 'package:remote_learn/widgets/animated_page_route.dart';
-import 'package:remote_learn/work_screens/work_main.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class TeacherMainScreen extends StatefulWidget {
+  const TeacherMainScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<TeacherMainScreen> createState() => _TeacherMainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _TeacherMainScreenState extends State<TeacherMainScreen> {
   final double bottomSheetHeight = 300;
   Future<bool> _onWillPop() async {
     return (await showDialog(
@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
         child: SafeArea(
             child: Scaffold(
                 body: Container(
-          decoration: Preferences().getMorning
+          decoration: Preferences().getTheme == 0
               ? const BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topRight,
@@ -79,15 +79,15 @@ class _MainScreenState extends State<MainScreen> {
                         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.of(context).push(AnimateToPage(widget: const ScreenWorkMain()));
+                              Navigator.of(context).push(AnimateToPage(widget: const TrackStudentsProgress()));
                             },
                             child: const Text(
-                              "Let's Work",
+                              "Track Progress",
                               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             style: ElevatedButton.styleFrom(
                               shape: const StadiumBorder(),
-                              primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                              primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
                               minimumSize: const Size(300, 40),
                               elevation: 12,
                             ),
@@ -99,12 +99,12 @@ class _MainScreenState extends State<MainScreen> {
                                 Navigator.of(context).push(AnimateToPage(widget: const ScreenQuiz()));
                               },
                               child: const Text(
-                                "Test Me",
+                                "Make Test",
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder(),
-                                primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
                                 minimumSize: const Size(300, 40),
                                 elevation: 12,
                               ),
@@ -113,18 +113,14 @@ class _MainScreenState extends State<MainScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  Preferences().setMorning = !Preferences().getMorning;
-                                });
-                              },
+                              onPressed: () {},
                               child: const Text(
                                 "Settings",
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder(),
-                                primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
                                 minimumSize: const Size(300, 40),
                                 elevation: 12,
                               ),
