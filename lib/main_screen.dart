@@ -41,158 +41,103 @@ class _MainScreenState extends State<MainScreen> {
         onWillPop: _onWillPop,
         child: SafeArea(
             child: Scaffold(
-                bottomSheet: Container(
-                  decoration: Preferences().getMorning
-                      ? const BoxDecoration(
-                          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                          Color(0xFF4563DB),
-                          Color(0xFF3594DD),
-                          Color(0xFF4563DB),
-                        ]))
-                      : const BoxDecoration(
-                          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                          Color(0xFF0c2e4a),
-                          Color(0xFF3594DD),
-                          Color(0xFF1c2e4a),
-                        ])),
-                  child: Container(
-                    height: bottomSheetHeight,
-                    decoration: BoxDecoration(
-                        gradient: Preferences().getMorning
-                            ? const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                                Color(0xFF5594DD),
-                                Color(0xFF4563DB),
-                                Color(0xFF4563DB),
-                                Color(0xFF4563DB),
-                              ])
-                            : const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                                Color(0xFF1c2e4a),
-                                Color(0xFF1c2e4a),
-                                Color(0xFF1c2e4a),
-                                Color(0xFF1c2e4a),
-                              ]),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        )),
-                    child: SizedBox(
-                      width: double.maxFinite,
-                      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(AnimateToPage(widget: const ScreenWorkMain()));
-                          },
-                          child: const Text(
-                            "Let's Work",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
-                            minimumSize: const Size(300, 40),
-                            elevation: 12,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(AnimateToPage(widget: const ScreenQuiz()));
-                            },
-                            child: const Text(
-                              "Test Me",
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              shape: const StadiumBorder(),
-                              primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
-                              minimumSize: const Size(300, 40),
-                              elevation: 12,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                Preferences().setMorning = !Preferences().getMorning;
-                              });
-                            },
-                            child: const Text(
-                              "Settings",
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              shape: const StadiumBorder(),
-                              primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
-                              minimumSize: const Size(300, 40),
-                              elevation: 12,
-                            ),
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ),
-                ),
                 body: Container(
-                  decoration: Preferences().getMorning
-                      ? const BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: [0.1, 0.4, 0.7, 0.9],
-                              colors: [Color(0xFF3594DD), Color(0xFF4563DB), Color(0xFF5036D5), Color(0xFF5B16D0)]),
-                        )
-                      : const BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: [0.1, 0.4, 0.7, 0.9],
-                              colors: [Color(0xFF203354), Color(0xFF1c2e4a), Color(0xFF192841), Color(0xFF192841)]),
-                        ),
-                  child: LayoutBuilder(builder: (context, BoxConstraints viewportBoxConstraints) {
-                    return SingleChildScrollView(
-                        child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: viewportBoxConstraints.maxHeight,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              "assets/images/logo.png",
-                              height: viewportBoxConstraints.maxHeight - bottomSheetHeight,
-                              width: viewportBoxConstraints.maxWidth,
+          decoration: Preferences().getMorning
+              ? const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      stops: [0.1, 0.4, 0.6, 0.8, 1],
+                      colors: [Color(0xFFDC8665), Color(0xFF138086), Color(0xFF534666), Color(0xFFCD7672), Color(0xFFEEB462)]),
+                )
+              : const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      stops: [0.1, 0.4, 0.6, 0.8, 1],
+                      colors: [Color(0xFF041B2D), Color(0xFF004E9A), Color(0xFF428CD4), Color(0xFFFF9CDA), Color(0xFFEa4492)]),
+                ),
+          child: LayoutBuilder(builder: (context, BoxConstraints viewportBoxConstraints) {
+            return SingleChildScrollView(
+                child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: viewportBoxConstraints.maxHeight,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/logo.png",
+                      height: viewportBoxConstraints.maxHeight - bottomSheetHeight,
+                      width: viewportBoxConstraints.maxWidth,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: SizedBox(
+                        width: double.maxFinite,
+                        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(AnimateToPage(widget: const ScreenWorkMain()));
+                            },
+                            child: const Text(
+                              "Let's Work",
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 16.0),
-                              child: Text(
-                                "",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
+                            style: ElevatedButton.styleFrom(
+                              shape: const StadiumBorder(),
+                              primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                              minimumSize: const Size(300, 40),
+                              elevation: 12,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(AnimateToPage(widget: const ScreenQuiz()));
+                              },
+                              child: const Text(
+                                "Test Me",
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                minimumSize: const Size(300, 40),
+                                elevation: 12,
                               ),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 16.0),
-                              child: Text(
-                                "",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  Preferences().setMorning = !Preferences().getMorning;
+                                });
+                              },
+                              child: const Text(
+                                "Settings",
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                minimumSize: const Size(300, 40),
+                                elevation: 12,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ]),
                       ),
-                    ));
-                  }),
-                ))));
+                    ),
+                  ],
+                ),
+              ),
+            ));
+          }),
+        ))));
   }
 }

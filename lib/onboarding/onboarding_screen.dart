@@ -89,10 +89,10 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
               duration: const Duration(milliseconds: 750),
               secondChild: FloatingActionButton.extended(
                 heroTag: "floatSecondTag",
-                backgroundColor: Preferences().getMorning ? const Color(0xFF5036D5) : const Color(0xFF092841),
+                backgroundColor: Preferences().getMorning ? Colors.amber : const Color(0xFF092841),
                 foregroundColor: Colors.white,
                 elevation: 2,
-                splashColor: Preferences().getMorning ? const Color(0xFF3036D5) : const Color(0xFF172841),
+                splashColor: Preferences().getMorning ? Colors.amber : const Color(0xFF172841),
                 onPressed: () {
                   Preferences().setRoute = '/screen-main';
                   Navigator.of(context).pushReplacement(AnimateToPage(widget: const MainScreen()));
@@ -102,7 +102,7 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
               crossFadeState: _currentPage != contents.length - 1 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
               firstChild: FloatingActionButton.extended(
                 heroTag: "floatFirstTag",
-                backgroundColor: Preferences().getMorning ? const Color(0xFF5036D5) : const Color(0xFF092841),
+                backgroundColor: Preferences().getMorning ? Colors.amber : const Color(0xFF092841),
                 foregroundColor: Colors.white,
                 elevation: 2,
                 splashColor: Preferences().getMorning ? const Color(0xFF3036D5) : const Color(0xFF172841),
@@ -125,10 +125,10 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
             decoration: Preferences().getMorning
                 ? const BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.1, 0.4, 0.7, 0.9],
-                        colors: [Color(0xFF3594DD), Color(0xFF4563DB), Color(0xFF5036D5), Color(0xFF5B16D0)]),
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: [0.1, 0.4, 0.6, 0.8, 1],
+                        colors: [Color(0xFFDC8665), Color(0xFF138086), Color(0xFF534666), Color(0xFFCD7672), Color(0xFFEEB462)]),
                   )
                 : const BoxDecoration(
                     gradient: LinearGradient(

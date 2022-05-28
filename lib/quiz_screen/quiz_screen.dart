@@ -117,10 +117,10 @@ class _ScreenQuizState extends State<ScreenQuiz> {
             decoration: Preferences().getMorning
                 ? const BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.1, 0.4, 0.7, 0.9],
-                        colors: [Color(0xFF3594DD), Color(0xFF4563DB), Color(0xFF5036D5), Color(0xFF5B16D0)]),
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: [0.1, 0.4, 0.6, 0.8, 1],
+                        colors: [Color(0xFFDC8665), Color(0xFF138086), Color(0xFF534666), Color(0xFFCD7672), Color(0xFFEEB462)]),
                   )
                 : const BoxDecoration(
                     gradient: LinearGradient(
