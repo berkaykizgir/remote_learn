@@ -13,8 +13,6 @@ class ScreenQuiz extends StatefulWidget {
 }
 
 class _ScreenQuizState extends State<ScreenQuiz> {
-  Color correctColor = Colors.green;
-  Color defaultColor = Colors.blue;
   bool answered = false;
   bool answerASelected = false;
   bool answerBSelected = false;
@@ -34,6 +32,57 @@ class _ScreenQuizState extends State<ScreenQuiz> {
       return (question[qNumber]['correct']).toString() == index;
     }
     return false;
+  }
+
+  void onAnswerTap(String index) {
+    setState(() {
+      answered = true;
+      if (index == '0') {
+        answerASelected = true;
+      }
+      if (index == '1') {
+        answerBSelected = true;
+      }
+      if (index == '2') {
+        answerCSelected = true;
+      }
+      if (index == '3') {
+        answerDSelected = true;
+      }
+    });
+    Future.delayed(const Duration(seconds: 1)).then((value) {
+      setState(() {
+        answered = true;
+        showingAnswer = true;
+        if ((question[qNumber]['correct']).toString() == index) {
+          answerCorrect = true;
+        }
+      });
+    }).whenComplete(() {
+      Future.delayed(const Duration(seconds: 4)).then((value) {
+        setState(() {
+          answered = true;
+          if (index == '0') {
+            answerASelected = false;
+          }
+          if (index == '1') {
+            answerBSelected = false;
+          }
+          if (index == '2') {
+            answerCSelected = false;
+          }
+          if (index == '3') {
+            answerDSelected = false;
+          }
+          showingAnswer = false;
+          answerCorrect = false;
+        });
+      }).whenComplete(() {
+        setState(() {
+          answered = false;
+        });
+      });
+    });
   }
 
   @override
@@ -59,209 +108,134 @@ class _ScreenQuizState extends State<ScreenQuiz> {
       child: Scaffold(
         appBar: AppBar(),
         body: LayoutBuilder(builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return SingleChildScrollView(
-            child: Container(
-              decoration: Preferences().getMorning
-                  ? const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.1, 0.4, 0.7, 0.9],
-                          colors: [Color(0xFF3594DD), Color(0xFF4563DB), Color(0xFF5036D5), Color(0xFF5B16D0)]),
-                    )
-                  : const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.1, 0.4, 0.7, 0.9],
-                          colors: [Color(0xFF203354), Color(0xFF1c2e4a), Color(0xFF192841), Color(0xFF192841)]),
-                    ),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: viewportConstraints.maxHeight,
-                ),
-                child: IgnorePointer(
-                  ignoring: answerASelected || answerBSelected || answerCSelected || answerDSelected,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Text(
-                            question[qNumber]['question'].toString(),
-                            softWrap: true,
-                            style: const TextStyle(
-                              fontSize: 26,
-                              color: Colors.white,
+          return Container(
+            decoration: Preferences().getMorning
+                ? const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [0.1, 0.4, 0.7, 0.9],
+                        colors: [Color(0xFF3594DD), Color(0xFF4563DB), Color(0xFF5036D5), Color(0xFF5B16D0)]),
+                  )
+                : const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [0.1, 0.4, 0.7, 0.9],
+                        colors: [Color(0xFF203354), Color(0xFF1c2e4a), Color(0xFF192841), Color(0xFF192841)]),
+                  ),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: viewportConstraints.maxHeight,
+              ),
+              child: IgnorePointer(
+                ignoring: answerASelected || answerBSelected || answerCSelected || answerDSelected,
+                child: Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: Text(
+                              question[qNumber]['question'].toString(),
+                              softWrap: true,
+                              style: const TextStyle(
+                                fontSize: 26,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 16.0),
-                          child: Divider(
-                            thickness: 5,
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 16.0),
+                            child: Divider(
+                              thickness: 5,
+                            ),
                           ),
-                        ),
-                        Answer(
-                          answerText: (question[qNumber]['answer'] as List)[0],
-                          answerColor: containsCorrectAnswer('0')
-                              ? Colors.green
-                              : isAnyAnswerSelected()
-                                  ? answerASelected
-                                      ? showingAnswer
-                                          ? answerCorrect
-                                              ? Colors.green
-                                              : Colors.red
-                                          : Colors.orange
-                                      : Colors.grey
-                                  : Colors.transparent,
-                          answerTap: () {
-                            setState(() {
-                              answered = true;
-                              answerASelected = true;
-                            });
-                            Future.delayed(const Duration(seconds: 2)).then((value) {
-                              setState(() {
-                                answered = true;
-                                showingAnswer = true;
-                                if ((question[qNumber]['correct']).toString() == '0') {
-                                  answerCorrect = true;
-                                }
-                              });
-                            });
-                            Future.delayed(const Duration(seconds: 4)).then((value) {
-                              setState(() {
-                                setState(() {
-                                  answered = false;
-                                  answerASelected = false;
-                                  showingAnswer = false;
-                                  answerCorrect = false;
-                                });
-                              });
-                            });
-                          },
-                        ),
-                        Answer(
-                            answerText: (question[qNumber]['answer'] as List)[1],
-                            answerColor: containsCorrectAnswer('1')
-                                ? Colors.green
-                                : isAnyAnswerSelected()
-                                    ? answerBSelected
-                                        ? showingAnswer
-                                            ? answerCorrect
-                                                ? Colors.green
-                                                : Colors.red
-                                            : Colors.orange
-                                        : Colors.grey
-                                    : Colors.transparent,
-                            answerTap: () {
-                              setState(() {
-                                answered = true;
-                                answerBSelected = true;
-                              });
-                              Future.delayed(const Duration(seconds: 2)).then((value) {
-                                setState(() {
-                                  answered = true;
-                                  showingAnswer = true;
-                                  if ((question[qNumber]['correct']).toString() == '1') {
-                                    answerCorrect = true;
-                                  }
-                                });
-                              });
-                              Future.delayed(const Duration(seconds: 4)).then((value) {
-                                setState(() {
-                                  setState(() {
-                                    answered = false;
-                                    answerBSelected = false;
-                                    showingAnswer = false;
-                                    answerCorrect = false;
-                                  });
-                                });
-                              });
-                            }),
-                        Answer(
-                            answerText: (question[qNumber]['answer'] as List)[2],
-                            answerColor: containsCorrectAnswer('2')
-                                ? Colors.green
-                                : isAnyAnswerSelected()
-                                    ? answerCSelected
-                                        ? showingAnswer
-                                            ? answerCorrect
-                                                ? Colors.green
-                                                : Colors.red
-                                            : Colors.orange
-                                        : Colors.grey
-                                    : Colors.transparent,
-                            answerTap: () {
-                              setState(() {
-                                answered = true;
-                                answerCSelected = true;
-                              });
-                              Future.delayed(const Duration(seconds: 2)).then((value) {
-                                setState(() {
-                                  answered = true;
-                                  showingAnswer = true;
-                                  if ((question[qNumber]['correct']).toString() == '2') {
-                                    answerCorrect = true;
-                                  }
-                                });
-                              });
-                              Future.delayed(const Duration(seconds: 4)).then((value) {
-                                setState(() {
-                                  setState(() {
-                                    answered = false;
-                                    answerCSelected = false;
-                                    showingAnswer = false;
-                                    answerCorrect = false;
-                                  });
-                                });
-                              });
-                            }),
-                        Answer(
-                            answerText: (question[qNumber]['answer'] as List)[3],
-                            answerColor: containsCorrectAnswer('3')
-                                ? Colors.green
-                                : isAnyAnswerSelected()
-                                    ? answerDSelected
-                                        ? showingAnswer
-                                            ? answerCorrect
-                                                ? Colors.green
-                                                : Colors.red
-                                            : Colors.orange
-                                        : Colors.grey
-                                    : Colors.transparent,
-                            answerTap: () {
-                              setState(() {
-                                answered = true;
-                                answerDSelected = true;
-                              });
-                              Future.delayed(const Duration(seconds: 2)).then((value) {
-                                setState(() {
-                                  answered = true;
-                                  showingAnswer = true;
-                                  if ((question[qNumber]['correct']).toString() == '3') {
-                                    answerCorrect = true;
-                                  }
-                                });
-                              });
-                              Future.delayed(const Duration(seconds: 4)).then((value) {
-                                setState(() {
-                                  setState(() {
-                                    answered = false;
-                                    answerDSelected = false;
-                                    showingAnswer = false;
-                                    answerCorrect = false;
-                                  });
-                                });
-                              });
-                            }),
-                      ],
+                          Answer(
+                              answerText: (question[qNumber]['answer'] as List)[0],
+                              answerColor: containsCorrectAnswer('0')
+                                  ? Colors.green
+                                  : isAnyAnswerSelected()
+                                      ? answerASelected
+                                          ? showingAnswer
+                                              ? answerCorrect
+                                                  ? Colors.green
+                                                  : Colors.red
+                                              : Colors.orange
+                                          : Colors.grey
+                                      : Colors.transparent,
+                              answerTap: () {
+                                onAnswerTap('0');
+                              }),
+                          Answer(
+                              answerText: (question[qNumber]['answer'] as List)[1],
+                              answerColor: containsCorrectAnswer('1')
+                                  ? Colors.green
+                                  : isAnyAnswerSelected()
+                                      ? answerBSelected
+                                          ? showingAnswer
+                                              ? answerCorrect
+                                                  ? Colors.green
+                                                  : Colors.red
+                                              : Colors.orange
+                                          : Colors.grey
+                                      : Colors.transparent,
+                              answerTap: () {
+                                onAnswerTap('1');
+                              }),
+                          Answer(
+                              answerText: (question[qNumber]['answer'] as List)[2],
+                              answerColor: containsCorrectAnswer('2')
+                                  ? Colors.green
+                                  : isAnyAnswerSelected()
+                                      ? answerCSelected
+                                          ? showingAnswer
+                                              ? answerCorrect
+                                                  ? Colors.green
+                                                  : Colors.red
+                                              : Colors.orange
+                                          : Colors.grey
+                                      : Colors.transparent,
+                              answerTap: () {
+                                onAnswerTap('2');
+                              }),
+                          Answer(
+                              answerText: (question[qNumber]['answer'] as List)[3],
+                              answerColor: containsCorrectAnswer('3')
+                                  ? Colors.green
+                                  : isAnyAnswerSelected()
+                                      ? answerDSelected
+                                          ? showingAnswer
+                                              ? answerCorrect
+                                                  ? Colors.green
+                                                  : Colors.red
+                                              : Colors.orange
+                                          : Colors.grey
+                                      : Colors.transparent,
+                              answerTap: () {
+                                onAnswerTap('3');
+                              }),
+                        ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      bottom: 16,
+                      right: 16,
+                      child: AnimatedOpacity(
+                        duration: const Duration(seconds: 1),
+                        opacity: showingAnswer ? 1 : 0,
+                        child: Image.asset(
+                          "assets/images/morning.png",
+                          height: 100,
+                          width: 100,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
