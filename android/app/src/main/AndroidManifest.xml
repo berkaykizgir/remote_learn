@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.me_test">
+    package="com.example.remote_learn">
    <application
-        android:label="me_test"
+        android:label="remote_learn"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

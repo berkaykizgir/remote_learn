@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:me_test/preferences.dart';
+import 'package:remote_learn/preferences.dart';
 
 class ScreenWorkMain extends StatefulWidget {
   const ScreenWorkMain({Key? key}) : super(key: key);

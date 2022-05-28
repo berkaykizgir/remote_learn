@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:me_test/preferences.dart';
-import 'package:me_test/widgets/display.dart';
+import 'package:remote_learn/preferences.dart';
+import 'package:remote_learn/widgets/display.dart';
 
 class ScreenQuiz extends StatefulWidget {
   const ScreenQuiz({Key? key}) : super(key: key);

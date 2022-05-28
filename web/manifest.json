@@ -1,6 +1,6 @@
 {
-    "name": "me_test",
-    "short_name": "me_test",
+    "name": "remote_learn",
+    "short_name": "remote_learn",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

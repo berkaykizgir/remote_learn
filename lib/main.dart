@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:me_test/onboarding/onboarding_screen.dart';
-import 'package:me_test/preferences.dart';
-import 'package:me_test/quiz_screen/quiz_screen.dart';
-import 'package:me_test/work_screens/work_main.dart';
+import 'package:remote_learn/onboarding/onboarding_screen.dart';
+import 'package:remote_learn/preferences.dart';
+import 'package:remote_learn/quiz_screen/quiz_screen.dart';
+import 'package:remote_learn/work_screens/work_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

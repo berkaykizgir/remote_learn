@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:me_test/onboarding/onboarding_contents.dart';
-import 'package:me_test/preferences.dart';
-import 'package:me_test/quiz_screen/quiz_screen.dart';
-import 'package:me_test/widgets/animated_page_route.dart';
-import 'package:me_test/work_screens/work_main.dart';
+import 'package:remote_learn/onboarding/onboarding_contents.dart';
+import 'package:remote_learn/preferences.dart';
+import 'package:remote_learn/quiz_screen/quiz_screen.dart';
+import 'package:remote_learn/widgets/animated_page_route.dart';
+import 'package:remote_learn/work_screens/work_main.dart';
 
 class ScreenOnboarding extends StatefulWidget {
   const ScreenOnboarding({Key? key}) : super(key: key);
