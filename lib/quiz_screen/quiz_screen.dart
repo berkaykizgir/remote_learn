@@ -30,7 +30,6 @@ class _ScreenQuizState extends State<ScreenQuiz> {
     });
   }
 
-//TODO: if answer is '' do not render the option
   @override
   Widget build(BuildContext context) {
     if (!answered) {
