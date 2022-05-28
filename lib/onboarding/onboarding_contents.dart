@@ -25,9 +25,4 @@ List<OnboardingContents> contents = [
     desc:
         "Her gün düzenli olarak pratik yaparak kodlama seviyeni ve kaliteni geliştirebilir, yeni methodlar keşfedebilirsin. Düzenli kodlama egzersizi yapmak öğrenme yolculuğunu hızlandırarak sana motivasyon sağlar. Hadi başlayalım !",
   ),
-  OnboardingContents(
-    title: "",
-    image: "assets/images/logo.png",
-    desc: "",
-  ),
 ];

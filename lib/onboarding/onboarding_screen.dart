@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:remote_learn/main_screen.dart';
 import 'package:remote_learn/onboarding/onboarding_contents.dart';
 import 'package:remote_learn/preferences.dart';
-import 'package:remote_learn/quiz_screen/quiz_screen.dart';
 import 'package:remote_learn/widgets/animated_page_route.dart';
-import 'package:remote_learn/work_screens/work_main.dart';
 
 class ScreenOnboarding extends StatefulWidget {
   const ScreenOnboarding({Key? key}) : super(key: key);
@@ -17,12 +16,10 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
   final _controller = PageController();
   int _currentPage = 0;
   bool ischangingScreen = false;
-  bool isLoginScreen = false;
-  final double bottomSheetHeight = 300;
 
   List<Widget> _buildPageIndicator() {
     List<Widget> list = [];
-    for (int i = 0; i < contents.length - 1; i++) {
+    for (int i = 0; i < contents.length; i++) {
       list.add(i == _currentPage ? _indicator(true) : _indicator(false));
     }
     return list;
@@ -83,148 +80,43 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
       onWillPop: _onWillPop,
       child: SafeArea(
         child: Scaffold(
-          bottomSheet: AnimatedCrossFade(
-              firstChild: Container(
-                height: 0,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: AnimatedCrossFade(
+              firstCurve: Curves.easeOut,
+              secondCurve: Curves.easeOut,
+              sizeCurve: Curves.ease,
+              duration: const Duration(milliseconds: 750),
+              secondChild: FloatingActionButton.extended(
+                heroTag: "floatSecondTag",
+                backgroundColor: Preferences().getMorning ? const Color(0xFF5036D5) : const Color(0xFF092841),
+                foregroundColor: Colors.white,
+                elevation: 2,
+                splashColor: Preferences().getMorning ? const Color(0xFF3036D5) : const Color(0xFF172841),
+                onPressed: () {
+                  Preferences().setRoute = '/screen-main';
+                  Navigator.of(context).pushReplacement(AnimateToPage(widget: const MainScreen()));
+                },
+                label: const Text("Start the journey"),
               ),
-              secondChild: Container(
-                decoration: Preferences().getMorning
-                    ? const BoxDecoration(
-                        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                        Color(0xFF4563DB),
-                        Color(0xFF3594DD),
-                        Color(0xFF4563DB),
-                      ]))
-                    : const BoxDecoration(
-                        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                        Color(0xFF0c2e4a),
-                        Color(0xFF3594DD),
-                        Color(0xFF1c2e4a),
-                      ])),
-                child: Container(
-                  height: bottomSheetHeight,
-                  decoration: BoxDecoration(
-                      gradient: Preferences().getMorning
-                          ? const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                              Color(0xFF5594DD),
-                              Color(0xFF4563DB),
-                              Color(0xFF4563DB),
-                              Color(0xFF4563DB),
-                            ])
-                          : const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                              Color(0xFF1c2e4a),
-                              Color(0xFF1c2e4a),
-                              Color(0xFF1c2e4a),
-                              Color(0xFF1c2e4a),
-                            ]),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      )),
-                  child: SizedBox(
-                    width: double.maxFinite,
-                    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(AnimateToPage(widget: const ScreenWorkMain()));
-                        },
-                        child: const Text(
-                          "Let's Work",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          shape: const StadiumBorder(),
-                          primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
-                          minimumSize: const Size(300, 40),
-                          elevation: 12,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(AnimateToPage(widget: const ScreenQuiz()));
-                          },
-                          child: const Text(
-                            "Test Me",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
-                            minimumSize: const Size(300, 40),
-                            elevation: 12,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              Preferences().setMorning = !Preferences().getMorning;
-                            });
-                          },
-                          child: const Text(
-                            "Settings",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            primary: Preferences().getMorning ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
-                            minimumSize: const Size(300, 40),
-                            elevation: 12,
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ),
-                ),
-              ),
-              crossFadeState: isLoginScreen ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-              duration: const Duration(milliseconds: 1500)),
-          floatingActionButton: AnimatedOpacity(
-            opacity: isLoginScreen ? 0 : 1,
-            duration: const Duration(milliseconds: 1500),
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: AnimatedCrossFade(
-                firstCurve: Curves.easeOut,
-                secondCurve: Curves.easeOut,
-                sizeCurve: Curves.ease,
-                duration: const Duration(milliseconds: 750),
-                secondChild: FloatingActionButton.extended(
-                  heroTag: "floatSecondTag",
-                  backgroundColor: Preferences().getMorning ? const Color(0xFF5036D5) : const Color(0xFF092841),
-                  foregroundColor: Colors.white,
-                  elevation: 2,
-                  splashColor: Preferences().getMorning ? const Color(0xFF3036D5) : const Color(0xFF172841),
-                  onPressed: () {
-                    setState(() {
-                      isLoginScreen = true;
-                    });
-                  },
-                  label: const Text("Start the journey"),
-                ),
-                crossFadeState: _currentPage != contents.length - 2 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                firstChild: FloatingActionButton.extended(
-                  heroTag: "floatFirstTag",
-                  backgroundColor: Preferences().getMorning ? const Color(0xFF5036D5) : const Color(0xFF092841),
-                  foregroundColor: Colors.white,
-                  elevation: 2,
-                  splashColor: Preferences().getMorning ? const Color(0xFF3036D5) : const Color(0xFF172841),
-                  onPressed: () {
-                    _controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
-                  },
-                  label: Row(
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: Text('Next', style: TextStyle(color: Colors.white)),
-                      ),
-                      Icon(Icons.arrow_forward, color: Colors.white, size: 20),
-                    ],
-                  ),
+              crossFadeState: _currentPage != contents.length - 1 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              firstChild: FloatingActionButton.extended(
+                heroTag: "floatFirstTag",
+                backgroundColor: Preferences().getMorning ? const Color(0xFF5036D5) : const Color(0xFF092841),
+                foregroundColor: Colors.white,
+                elevation: 2,
+                splashColor: Preferences().getMorning ? const Color(0xFF3036D5) : const Color(0xFF172841),
+                onPressed: () {
+                  _controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+                },
+                label: Row(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: Text('Next', style: TextStyle(color: Colors.white)),
+                    ),
+                    Icon(Icons.arrow_forward, color: Colors.white, size: 20),
+                  ],
                 ),
               ),
             ),
@@ -256,7 +148,7 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
                         physics: const NeverScrollableScrollPhysics(),
                         controller: _controller,
                         onPageChanged: (value) => setState(() => _currentPage = value),
-                        itemCount: contents.length - 1,
+                        itemCount: contents.length,
                         itemBuilder: (context, i) {
                           return LayoutBuilder(builder: (context, BoxConstraints viewportBoxConstraints) {
                             return SingleChildScrollView(
@@ -264,104 +156,63 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
                                 constraints: BoxConstraints(
                                   minHeight: viewportBoxConstraints.maxHeight,
                                 ),
-                                child: AnimatedCrossFade(
-                                  firstCurve: Curves.easeOut,
-                                  secondCurve: Curves.easeOut,
-                                  sizeCurve: Curves.ease,
-                                  duration: const Duration(milliseconds: 1500),
-                                  crossFadeState: isLoginScreen ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                                  secondChild: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      children: [
-                                        Image.asset(
-                                          contents[i + 1].image,
-                                          height: isLoginScreen ? viewportBoxConstraints.maxHeight - bottomSheetHeight : viewportBoxConstraints.maxHeight * 0.5,
-                                          width: viewportBoxConstraints.maxWidth,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 16.0),
-                                          child: Text(
-                                            contents[i + 1].title,
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Stack(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: (() {
+                                              setState(() {
+                                                Preferences().setMorning = !Preferences().getMorning;
+                                              });
+                                            }),
+                                            child: AnimatedCrossFade(
+                                              firstCurve: Curves.easeOut,
+                                              secondCurve: Curves.easeOut,
+                                              sizeCurve: Curves.ease,
+                                              duration: const Duration(milliseconds: 1500),
+                                              crossFadeState: Preferences().getMorning ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                                              firstChild: Image.asset(
+                                                contents[i].image,
+                                                height: viewportBoxConstraints.maxHeight * 0.5,
+                                                width: viewportBoxConstraints.maxWidth,
+                                              ),
+                                              secondChild: Image.asset(
+                                                _currentPage == 0 ? "assets/images/night.png" : contents[i].image,
+                                                height: viewportBoxConstraints.maxHeight * 0.5,
+                                                width: viewportBoxConstraints.maxWidth,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 16.0),
-                                          child: Text(
-                                            contents[i + 1].desc,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w300,
-                                              color: Colors.white,
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 16.0),
+                                            child: Text(
+                                              contents[i].title,
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                            textAlign: TextAlign.center,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  firstChild: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Stack(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            InkWell(
-                                              onTap: (() {
-                                                setState(() {
-                                                  Preferences().setMorning = !Preferences().getMorning;
-                                                });
-                                              }),
-                                              child: AnimatedCrossFade(
-                                                firstCurve: Curves.easeOut,
-                                                secondCurve: Curves.easeOut,
-                                                sizeCurve: Curves.ease,
-                                                duration: const Duration(milliseconds: 1500),
-                                                crossFadeState: Preferences().getMorning ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                                                firstChild: Image.asset(
-                                                  contents[i].image,
-                                                  height: viewportBoxConstraints.maxHeight * 0.5,
-                                                  width: viewportBoxConstraints.maxWidth,
-                                                ),
-                                                secondChild: Image.asset(
-                                                  _currentPage == 0 ? "assets/images/night.png" : contents[i].image,
-                                                  height: viewportBoxConstraints.maxHeight * 0.5,
-                                                  width: viewportBoxConstraints.maxWidth,
-                                                ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 16.0),
+                                            child: Text(
+                                              contents[i].desc,
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.white,
                                               ),
+                                              textAlign: TextAlign.center,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 16.0),
-                                              child: Text(
-                                                contents[i].title,
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 16.0),
-                                              child: Text(
-                                                contents[i].desc,
-                                                style: const TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Colors.white,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -374,7 +225,7 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
                       padding: const EdgeInsets.only(bottom: 48.0),
                       child: AnimatedOpacity(
                         duration: const Duration(milliseconds: 500),
-                        opacity: _currentPage != contents.length - 2 && _currentPage != contents.length - 1 ? 1 : 0,
+                        opacity: _currentPage != contents.length - 1 && _currentPage != contents.length - 1 ? 1 : 0,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: _buildPageIndicator(),

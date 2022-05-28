@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:remote_learn/main_screen.dart';
 import 'package:remote_learn/onboarding/onboarding_screen.dart';
 import 'package:remote_learn/preferences.dart';
 import 'package:remote_learn/quiz_screen/quiz_screen.dart';
@@ -22,6 +23,7 @@ class MeTest extends StatelessWidget {
       '/onboarding': (context) => const ScreenOnboarding(),
       '/screen-work-main': (context) => const ScreenWorkMain(),
       '/screen-quiz': (context) => const ScreenQuiz(),
+      '/screen-main': (context) => const MainScreen(),
     };
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -36,7 +38,7 @@ class MeTest extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       routes: routes,
-      initialRoute: '/onboarding',
+      initialRoute: Preferences().getRoute,
     );
   }
 }

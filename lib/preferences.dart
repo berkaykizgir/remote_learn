@@ -5,6 +5,7 @@ class Preferences {
   static SharedPreferences? sharedPreferences;
   static final defaults = {
     'language': 'en_us',
+    'route': '/onboarding',
     'isMorning': true,
   };
   factory Preferences() => _instance;
@@ -21,4 +22,6 @@ class Preferences {
   Future<bool>? setBool(String key, bool value) => sharedPreferences?.setBool(key, value);
   get getMorning => getBool('isMorning');
   set setMorning(bool isMorning) => setBool('isMorning', isMorning);
+  get getRoute => getString('route');
+  set setRoute(String route) => setString('route', route);
 }
