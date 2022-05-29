@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:remote_learn/gamification/theme_contents.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
@@ -26,23 +27,11 @@ class Preferences {
   Future<bool>? setBool(String key, bool value) => sharedPreferences?.setBool(key, value);
   get getTheme => getInt('theme');
   List<Color> getThemeGradientBackgroundColor() {
-    if (getInt('theme') == 0) {
-      return [const Color(0xFF041B2D), const Color(0xFF004E9A), const Color(0xFF428CD4), const Color(0xFFFF9CDA), const Color(0xFFEa4492)];
-    }
-    if (getInt('theme') == 1) {
-      return [const Color(0xFFDC8665), const Color(0xFF138086), const Color(0xFF534666), const Color(0xFFCD7672), const Color(0xFFEEB462)];
-    }
-    return [];
+    return themeContents[getInt('theme')].gradientBackgroundColors;
   }
 
   Color getThemeButtonColor() {
-    if (getInt('theme') == 0) {
-      return const Color(0xFF4563DB);
-    }
-    if (getInt('theme') == 1) {
-      return const Color(0xFF1c2e4a);
-    }
-    return Colors.transparent;
+    return themeContents[getInt('theme')].buttonColor;
   }
 
   set setTheme(int theme) => setInt('theme', theme);

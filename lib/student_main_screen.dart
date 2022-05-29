@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:remote_learn/gamification/coin_market.dart';
 import 'package:remote_learn/preferences.dart';
 import 'package:remote_learn/quiz_screen/quiz_screen.dart';
 import 'package:remote_learn/widgets/animated_page_route.dart';
@@ -129,6 +130,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                             padding: const EdgeInsets.only(top: 16.0),
                             child: ElevatedButton(
                               onPressed: () {
+                                Navigator.of(context).push(AnimateToPage(widget: const CoinMarket()));
                                 //TODO: STUDENT SETTINGS SCREEN
                               },
                               child: const Text(
