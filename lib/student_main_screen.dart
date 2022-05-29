@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:remote_learn/preferences.dart';
 import 'package:remote_learn/quiz_screen/quiz_screen.dart';
 import 'package:remote_learn/widgets/animated_page_route.dart';
-import 'package:remote_learn/work_screens/work_main.dart';
+import 'package:remote_learn/student_flow/work_main.dart';
 
 class StudentMainScreen extends StatefulWidget {
   const StudentMainScreen({Key? key}) : super(key: key);
@@ -107,56 +107,8 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                             padding: const EdgeInsets.only(top: 16.0),
                             child: ElevatedButton(
                               onPressed: () {
-                                if (Preferences().getInvitationKey == '') {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text("Do you have invitation key from your teacher ?"),
-                                      content: const Text("Please enter the key below"),
-                                      actions: <Widget>[
-                                        TextField(
-                                          controller: keyController,
-                                          decoration: const InputDecoration(
-                                            hintText: "key",
-                                            border: OutlineInputBorder(),
-                                          ),
-                                          textInputAction: TextInputAction.done,
-                                          onSubmitted: (key) {
-                                            Preferences().setInvitationKey = key;
-                                          },
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 8.0),
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: TextButton(
-                                                  onPressed: () => Navigator.of(context).pop(),
-                                                  child: const Text(
-                                                    "Cancel",
-                                                    style: TextStyle(color: Colors.black),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: TextButton(
-                                                  onPressed: () {
-                                                    Preferences().setInvitationKey = keyController.text;
-
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text(
-                                                    "Let's work online",
-                                                    style: TextStyle(color: Colors.black),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
+                                if (Preferences().getInvitationKey != '') {
+                                  //TODO: WORK ONLINE REGISTRATION SCREEN
                                 } else {
                                   //TODO: work online screen.
                                 }
@@ -176,7 +128,9 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                //TODO: STUDENT SETTINGS SCREEN
+                              },
                               child: const Text(
                                 "Settings",
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

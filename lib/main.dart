@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:remote_learn/student_flow/work_main.dart';
 import 'package:remote_learn/student_main_screen.dart';
 import 'package:remote_learn/onboarding/onboarding_screen.dart';
 import 'package:remote_learn/preferences.dart';
 import 'package:remote_learn/quiz_screen/quiz_screen.dart';
 import 'package:remote_learn/teacher_main_screen.dart';
-import 'package:remote_learn/work_screens/work_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

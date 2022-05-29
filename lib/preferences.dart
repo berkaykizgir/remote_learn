@@ -26,7 +26,6 @@ class Preferences {
   Future<bool>? setBool(String key, bool value) => sharedPreferences?.setBool(key, value);
   get getTheme => getInt('theme');
   List<Color> getThemeGradientBackgroundColor() {
-    print(getInt('theme'));
     if (getInt('theme') == 0) {
       return [const Color(0xFF041B2D), const Color(0xFF004E9A), const Color(0xFF428CD4), const Color(0xFFFF9CDA), const Color(0xFFEa4492)];
     }
