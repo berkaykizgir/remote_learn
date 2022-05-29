@@ -32,8 +32,17 @@ class Preferences {
     if (getInt('theme') == 1) {
       return [const Color(0xFFDC8665), const Color(0xFF138086), const Color(0xFF534666), const Color(0xFFCD7672), const Color(0xFFEEB462)];
     }
-
     return [];
+  }
+
+  Color getThemeButtonColor() {
+    if (getInt('theme') == 0) {
+      return const Color(0xFF4563DB);
+    }
+    if (getInt('theme') == 1) {
+      return const Color(0xFF1c2e4a);
+    }
+    return Colors.transparent;
   }
 
   set setTheme(int theme) => setInt('theme', theme);

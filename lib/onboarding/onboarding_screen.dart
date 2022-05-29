@@ -35,11 +35,7 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
       height: 8,
       width: isActive ? 20 : 10,
       decoration: BoxDecoration(
-        color: isActive
-            ? Colors.white
-            : Preferences().getTheme == 0
-                ? const Color(0xFF7B51D3)
-                : const Color(0xFF203354),
+        color: isActive ? Colors.white : const Color(0xFF7B51D3),
         borderRadius: const BorderRadius.all(Radius.circular(50)),
       ),
     );
@@ -91,10 +87,10 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
               duration: const Duration(milliseconds: 750),
               secondChild: FloatingActionButton.extended(
                 heroTag: "floatSecondTag",
-                backgroundColor: Preferences().getTheme == 0 ? Colors.amber : const Color(0xFF092841),
+                backgroundColor: const Color(0xFF092841),
                 foregroundColor: Colors.white,
                 elevation: 2,
-                splashColor: Preferences().getTheme == 0 ? Colors.amber : const Color(0xFF172841),
+                splashColor: const Color(0xFF172841),
                 onPressed: () {
                   if (codeController.text == '12345678') {
                     Preferences().setRoute = '/teacher-main-screen';
@@ -111,10 +107,10 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
               crossFadeState: _currentPage != contents.length - 1 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
               firstChild: FloatingActionButton.extended(
                 heroTag: "floatFirstTag",
-                backgroundColor: Preferences().getTheme == 0 ? Colors.amber : const Color(0xFF092841),
+                backgroundColor: const Color(0xFF092841),
                 foregroundColor: Colors.white,
                 elevation: 2,
-                splashColor: Preferences().getTheme == 0 ? const Color(0xFF3036D5) : const Color(0xFF172841),
+                splashColor: const Color(0xFF172841),
                 onPressed: () {
                   _controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
                 },
@@ -203,44 +199,48 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
                         },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(48.0),
-                      child: AnimatedOpacity(
-                        opacity: _currentPage == contents.length - 1 ? 1 : 0,
-                        duration: const Duration(milliseconds: 500),
-                        child: Column(
-                          children: [
-                            const Text(
-                              "if you are teacher please enter the code that system gave you before",
-                              style: TextStyle(color: Colors.white, fontSize: 12),
-                            ),
-                            TextField(
-                              controller: codeController,
-                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                              maxLength: 8,
-                              cursorColor: Colors.white,
-                              textAlign: TextAlign.center,
-                              textInputAction: TextInputAction.done,
-                              decoration: const InputDecoration(
-                                  helperStyle: TextStyle(color: Colors.white),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    color: Colors.white,
-                                  )),
-                                  focusColor: Colors.white,
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    color: Colors.white,
-                                  )),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ))),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    ...[
+                      _currentPage == contents.length - 1
+                          ? Padding(
+                              padding: const EdgeInsets.all(48.0),
+                              child: AnimatedOpacity(
+                                opacity: _currentPage == contents.length - 1 ? 1 : 0,
+                                duration: const Duration(milliseconds: 500),
+                                child: Column(
+                                  children: [
+                                    const Text(
+                                      "if you are teacher please enter the code that system gave you before",
+                                      style: TextStyle(color: Colors.white, fontSize: 12),
+                                    ),
+                                    TextField(
+                                      controller: codeController,
+                                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                                      maxLength: 8,
+                                      cursorColor: Colors.white,
+                                      textAlign: TextAlign.center,
+                                      textInputAction: TextInputAction.done,
+                                      decoration: const InputDecoration(
+                                          helperStyle: TextStyle(color: Colors.white),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                            color: Colors.white,
+                                          )),
+                                          focusColor: Colors.white,
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                            color: Colors.white,
+                                          )),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                            color: Colors.white,
+                                          ))),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Container()
+                    ],
                     Padding(
                       padding: const EdgeInsets.only(bottom: 48.0),
                       child: AnimatedOpacity(

@@ -80,7 +80,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                             ),
                             style: ElevatedButton.styleFrom(
                               shape: const StadiumBorder(),
-                              primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                              primary: Preferences().getThemeButtonColor(),
                               minimumSize: const Size(300, 40),
                               elevation: 12,
                             ),
@@ -97,7 +97,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder(),
-                                primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                primary: Preferences().getThemeButtonColor(),
                                 minimumSize: const Size(300, 40),
                                 elevation: 12,
                               ),
@@ -119,7 +119,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder(),
-                                primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                primary: Preferences().getThemeButtonColor(),
                                 minimumSize: const Size(300, 40),
                                 elevation: 12,
                               ),
@@ -137,7 +137,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder(),
-                                primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                primary: Preferences().getThemeButtonColor(),
                                 minimumSize: const Size(300, 40),
                                 elevation: 12,
                               ),
