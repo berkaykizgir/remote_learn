@@ -48,7 +48,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                stops: const [0.1, 0.4, 0.6, 0.8, 1],
+                stops: const [0.05, 0.35, 0.60, 0.85, 1],
                 colors: Preferences().getThemeGradientBackgroundColor()),
           ),
           child: LayoutBuilder(builder: (context, BoxConstraints viewportBoxConstraints) {
@@ -130,7 +130,7 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                             padding: const EdgeInsets.only(top: 16.0),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.of(context).push(AnimateToPage(widget: const CoinMarket()));
+                                Navigator.of(context).pushReplacement(AnimateToPage(widget: const CoinMarket()));
                                 //TODO: STUDENT SETTINGS SCREEN
                               },
                               child: const Text(

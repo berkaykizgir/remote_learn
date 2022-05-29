@@ -23,7 +23,7 @@ class _ScreenWorkMainState extends State<ScreenWorkMain> {
                 gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
-                    stops: const [0.1, 0.4, 0.6, 0.8, 1],
+                    stops: const [0.05, 0.35, 0.60, 0.85, 1],
                     colors: Preferences().getThemeGradientBackgroundColor()),
               ),
               child: Padding(
@@ -46,7 +46,7 @@ class _ScreenWorkMainState extends State<ScreenWorkMain> {
                             gradient: LinearGradient(
                                 begin: Alignment.topRight,
                                 end: Alignment.bottomLeft,
-                                stops: const [0.1, 0.4, 0.6, 0.8, 1],
+                                stops: const [0.05, 0.35, 0.60, 0.85, 1],
                                 colors: Preferences().getThemeGradientBackgroundColor()),
                           ),
                           child: Column(
