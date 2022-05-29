@@ -98,9 +98,11 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
                 onPressed: () {
                   if (codeController.text == '12345678') {
                     Preferences().setRoute = '/teacher-main-screen';
+                    Preferences().setRole = 'teacher';
                     Navigator.of(context).pushReplacement(AnimateToPage(widget: const TeacherMainScreen()));
                   } else {
                     Preferences().setRoute = '/student-main-screen';
+                    Preferences().setRole = 'student';
                     Navigator.of(context).pushReplacement(AnimateToPage(widget: const StudentMainScreen()));
                   }
                 },

@@ -13,6 +13,7 @@ class StudentMainScreen extends StatefulWidget {
 }
 
 class _StudentMainScreenState extends State<StudentMainScreen> {
+  final TextEditingController keyController = TextEditingController();
   final double bottomSheetHeight = 300;
   Future<bool> _onWillPop() async {
     return (await showDialog(
@@ -92,6 +93,76 @@ class _StudentMainScreenState extends State<StudentMainScreen> {
                               },
                               child: const Text(
                                 "Test Me",
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                primary: Preferences().getTheme == 0 ? const Color(0xFF4563DB) : const Color(0xFF1c2e4a),
+                                minimumSize: const Size(300, 40),
+                                elevation: 12,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (Preferences().getInvitationKey == '') {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text("Do you have invitation key from your teacher ?"),
+                                      content: const Text("Please enter the key below"),
+                                      actions: <Widget>[
+                                        TextField(
+                                          controller: keyController,
+                                          decoration: const InputDecoration(
+                                            hintText: "key",
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          textInputAction: TextInputAction.done,
+                                          onSubmitted: (key) {
+                                            Preferences().setInvitationKey = key;
+                                          },
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 8.0),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: TextButton(
+                                                  onPressed: () => Navigator.of(context).pop(),
+                                                  child: const Text(
+                                                    "Cancel",
+                                                    style: TextStyle(color: Colors.black),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: TextButton(
+                                                  onPressed: () {
+                                                    Preferences().setInvitationKey = keyController.text;
+
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text(
+                                                    "Let's work online",
+                                                    style: TextStyle(color: Colors.black),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  //TODO: work online screen.
+                                }
+                              },
+                              child: const Text(
+                                "Work Online",
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               style: ElevatedButton.styleFrom(

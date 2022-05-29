@@ -9,6 +9,8 @@ class Preferences {
     'route': '/onboarding',
     'theme': 0,
     'balance': 0,
+    'role': 'student',
+    'invitation_key': '',
   };
   factory Preferences() => _instance;
   Preferences._internal();
@@ -38,6 +40,10 @@ class Preferences {
   set setTheme(int theme) => setInt('theme', theme);
   get getRoute => getString('route');
   set setRoute(String route) => setString('route', route);
+  get getRole => getString('role');
+  set setRole(String role) => setString('role', role);
+  get getInvitationKey => getString('invitation_key');
+  set setInvitationKey(String key) => setString('invitation_key', key);
   get getBalance => getInt('balance');
   set setBalance(int balance) => setInt('balance', Preferences().getBalance + balance);
 }
