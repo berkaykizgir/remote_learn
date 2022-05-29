@@ -42,21 +42,13 @@ class _TeacherMainScreenState extends State<TeacherMainScreen> {
         child: SafeArea(
             child: Scaffold(
                 body: Container(
-          decoration: Preferences().getTheme == 0
-              ? const BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      stops: [0.1, 0.4, 0.6, 0.8, 1],
-                      colors: [Color(0xFFDC8665), Color(0xFF138086), Color(0xFF534666), Color(0xFFCD7672), Color(0xFFEEB462)]),
-                )
-              : const BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      stops: [0.1, 0.4, 0.6, 0.8, 1],
-                      colors: [Color(0xFF041B2D), Color(0xFF004E9A), Color(0xFF428CD4), Color(0xFFFF9CDA), Color(0xFFEa4492)]),
-                ),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                stops: const [0.1, 0.4, 0.6, 0.8, 1],
+                colors: Preferences().getThemeGradientBackgroundColor()),
+          ),
           child: LayoutBuilder(builder: (context, BoxConstraints viewportBoxConstraints) {
             return SingleChildScrollView(
                 child: ConstrainedBox(

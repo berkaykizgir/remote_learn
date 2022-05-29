@@ -19,21 +19,13 @@ class _ScreenWorkMainState extends State<ScreenWorkMain> {
               elevation: 0,
             ),
             body: Container(
-              decoration: Preferences().getTheme == 0
-                  ? const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          stops: [0.1, 0.4, 0.6, 0.8, 1],
-                          colors: [Color(0xFFDC8665), Color(0xFF138086), Color(0xFF534666), Color(0xFFCD7672), Color(0xFFEEB462)]),
-                    )
-                  : const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.1, 0.4, 0.7, 0.9],
-                          colors: [Color(0xFF203354), Color(0xFF1c2e4a), Color(0xFF192841), Color(0xFF192841)]),
-                    ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: const [0.1, 0.4, 0.6, 0.8, 1],
+                    colors: Preferences().getThemeGradientBackgroundColor()),
+              ),
               child: Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: GridView.count(
@@ -50,18 +42,13 @@ class _ScreenWorkMainState extends State<ScreenWorkMain> {
                         child: Container(
                           width: 150,
                           height: 150,
-                          decoration: Preferences().getTheme == 0
-                              ? const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topRight,
-                                      end: Alignment.bottomLeft,
-                                      stops: [0.1, 0.4, 0.6, 0.8, 1],
-                                      colors: [Color(0xFFDC8665), Color(0xFF138086), Color(0xFF534666), Color(0xFFCD7672), Color(0xFFEEB462)]),
-                                )
-                              : const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFF203354), Colors.blue, Color(0xFF192841)]),
-                                ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                stops: const [0.1, 0.4, 0.6, 0.8, 1],
+                                colors: Preferences().getThemeGradientBackgroundColor()),
+                          ),
                           child: Column(
                             children: [
                               Padding(

@@ -129,21 +129,13 @@ class _ScreenOnboardingState extends State<ScreenOnboarding> with SingleTickerPr
             ),
           ),
           body: Container(
-            decoration: Preferences().getTheme == 0
-                ? const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.1, 0.4, 0.6, 0.8, 1],
-                        colors: [Color(0xFFDC8665), Color(0xFF138086), Color(0xFF534666), Color(0xFFCD7672), Color(0xFFEEB462)]),
-                  )
-                : const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.1, 0.4, 0.7, 0.9],
-                        colors: [Color(0xFF203354), Color(0xFF1c2e4a), Color(0xFF192841), Color(0xFF192841)]),
-                  ),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  stops: const [0.1, 0.4, 0.6, 0.8, 1],
+                  colors: Preferences().getThemeGradientBackgroundColor()),
+            ),
             child: Stack(
               children: [
                 Column(
