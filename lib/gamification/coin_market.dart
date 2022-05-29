@@ -73,10 +73,45 @@ class _CoinMarketState extends State<CoinMarket> {
                     children: List.generate(themeContents.length, (index) {
                       return InkWell(
                         onTap: () {
-                          setState(() {
-                            themeContents[index].locked = false;
-                            Preferences().setTheme = themeContents[index].index;
-                          });
+                          if (Preferences().getThemeMarketData(index)) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("Do you want to buy this theme with your coins ?"),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () => Navigator.of(context).pop(),
+                                    child: const Text(
+                                      "Cancel",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      if (Preferences().getBalance >= themeContents[index].price) {
+                                        Preferences().setBalance = -themeContents[index].price;
+                                        Preferences().setThemeMarketData(index);
+                                        themeContents[index].locked = Preferences().getThemeMarketData(index);
+                                        Preferences().setTheme = themeContents[index].index;
+                                      }
+
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      "Buy it",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ).then((value) {
+                              setState(() {});
+                            });
+                          } else {
+                            setState(() {
+                              Preferences().setTheme = themeContents[index].index;
+                            });
+                          }
                         },
                         child: Center(
                           child: Card(
